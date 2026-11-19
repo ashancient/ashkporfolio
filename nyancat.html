@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>portrait </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<title>Net art</title>
+</head>
+<body>
+
+<div class="container-fluid">
+
+<nav class="navbar navbar-expand-sm bg-light">
+
+  <div class="container-fluid">
+<ul class="navbar-nav">
+  <li class="nav-item" ><a class="nav-link" href="index.html">Home</a></li>
+  <li class="nav-item" ><a class="nav-link" href="glitchart.html">glitch art </a></li>
+  <li class="nav-item" ><a class="nav-link" href="mememashup.html">meme mashup</a></li>
+  <li class="nav-item" ><a class="nav-link" href="minecraft.html">minecraft</a></li>
+  <li class="nav-item" ><a class="nav-link" href="3dprint.html">3d print</a></li>
+  <li class="nav-item" ><a class="nav-link" href="netart.html">net art</a></li>
+  <li class="nav-item" ><a class="nav-link" href="portrait.html">portrait</a></li>
+  <li class="nav-item" ><a class="nav-link" href="drawingpad.html">drawing pad</a></li>
+ <li class="nav-item" ><a class="nav-link" href="mmoscreen.html">mmo screen shot</a></li>
+
+</ul>
+  </div>
+</nav>
+<h1>Portrait </h1>
+<p>Portrait of me. </p>
+<iframe src="nyancat/index.html" height="606" width="606" title="Iframe Example"></iframe>
+<pre>
+var ballx = 40; // width/2 ?
+var bally = 40;
+var ballSize = 10;
+var score =0;
+var img1, img2, img3, img4, beginImg;
+var  c; // our text color as a variable, set in setup
+var gameState ="begin";
+
+function preload() {
+
+  img1 = loadImage('https://ashancient.github.io/ashkporfolio/images/nyancat.png');
+  img2 = loadImage('https://ashancient.github.io/ashkporfolio/images/space1.jpg'); //background L1
+  img3 = loadImage('https://ashancient.github.io/ashkporfolio/images/space3.jpg'); //background L2
+  img4 = loadImage('https://ashancient.github.io/ashkporfolio/images/space2.jpg'); //background L3
+  img5 = loadImage('https://ashancient.github.io/ashkporfolio/images/spacer.jpg'); //background win
+  beginImg = loadImage('https://ashancient.github.io/ashkporfolio/images/space.jpg');
+}
+
+function setup() {
+  createCanvas(600, 600);
+  let c =color(255, 255, 255); //text color
+  fill(c);
+  textAlign(CENTER);
+  textSize(20); 
+} // end of setup
+
+
+function draw() {
+  
+if(gameState =="begin"){
+  background(beginImg);
+  beginGame();
+}
+  
+if(gameState =="L1"){
+  background(img2);
+  levelOne();
+}
+if(gameState =="L2"){
+    background(img3);
+  levelTwo();
+}
+if(gameState =="L3"){
+    background(img4);
+  levelThree();
+}
+if(gameState =="Win"){
+    background(img5);
+  win();
+}
+  text(("Score: " + score), width/2, 40);
+} // end of draw
+
+function beginGame(){
+ if (mouseIsPressed === true) {
+  gameState="L1";  
+ } // end of if mousIsPressed
+} // end of beginGame
+
+
+function levelOne(){
+  text("level 1", width/2, height-20);
+  var distToBall = dist(ballx+20, bally+20, mouseX, mouseY);
+  if (distToBall<ballSize/.25){
+    ballx= random(width-5);
+    bally = random(height-5);
+    score = score +1;
+  } // end if
+  if (score>=5){
+    gameState= "L2";
+  }
+  line(ballx+20, bally+20, mouseX, mouseY);
+image(img1, ballx-20, bally-20,160,80);
+} // end of level 1
+
+
+function levelTwo(){
+  text("level 2", width/2, height-20);
+  var distToBall = dist(ballx+20, bally+20, mouseX, mouseY);
+  if (distToBall<ballSize/.25){
+    ballx= random(width-5);
+    bally = random(height-5);
+    score = score +1;
+    ballSize=ballSize-.1;
+  } // end if
+  if (score>=10){
+       gameState= "L3";
+  }
+    image(img1, ballx, bally, ballSize, ballSize);
+} // end of level 2
+
+function levelThree(){
+  text("level 3", width/2, height-20);
+  var distToBall = dist(ballx+20, bally+20, mouseX, mouseY);
+  if (distToBall<ballSize/.25){
+    ballx= random(width-5);
+    bally = random(height-5);
+    score = score +1;
+    ballSize=ballSize -.1;
+  } // end if
+  if (score>=30){
+       gameState= "Win";
+  }
+      image(img1, ballx, bally, ballSize, ballSize);
+} // end level 3
+
+function win(){
+  text("You Won", width/2, height/2);
+} // end win
+</pre>
+</div>
+</body>
+</html>
