@@ -1,21 +1,24 @@
-var ballx = 300; // width/2 ?
-var bally = 300;
-var ballSize = 40;
+var ballx = 40; // width/2 ?
+var bally = 40;
+var ballSize = 10;
 var score =0;
-var img1, img2, beginImg;
+var img1, img2, img3, img4, beginImg;
 var  c; // our text color as a variable, set in setup
 var gameState ="begin";
 
 function preload() {
 
-  img1 = loadImage('https://veryprofessional3d.github.io/images/rainbow.gif');
-  img2 = loadImage('https://veryprofessional3d.github.io/images/tomb-cat.jpg'); //background L1
-  beginImg = loadImage('https://veryprofessional3d.github.io/images/cat3.jpg');
+  img1 = loadImage('https://ashancient.github.io/ashkporfolio/images/nyancat.png');
+  img2 = loadImage('https://ashancient.github.io/ashkporfolio/images/space1.jpg'); //background L1
+  img3 = loadImage('https://ashancient.github.io/ashkporfolio/images/space3.jpg'); //background L2
+  img4 = loadImage('https://ashancient.github.io/ashkporfolio/images/space2.jpg'); //background L3
+  img5 = loadImage('https://ashancient.github.io/ashkporfolio/images/spacer.jpg'); //background win
+  beginImg = loadImage('https://ashancient.github.io/ashkporfolio/images/space.jpg');
 }
 
 function setup() {
   createCanvas(600, 600);
-  let c =color(200, 100, 100); //text color
+  let c =color(255, 255, 255); //text color
   fill(c);
   textAlign(CENTER);
   textSize(20); 
@@ -34,15 +37,15 @@ if(gameState =="L1"){
   levelOne();
 }
 if(gameState =="L2"){
-    background(135);
+    background(img3);
   levelTwo();
 }
 if(gameState =="L3"){
-    background(50);
+    background(img4);
   levelThree();
 }
 if(gameState =="Win"){
-    background(50);
+    background(img5);
   win();
 }
   text(("Score: " + score), width/2, 40);
@@ -58,7 +61,7 @@ function beginGame(){
 function levelOne(){
   text("level 1", width/2, height-20);
   var distToBall = dist(ballx+20, bally+20, mouseX, mouseY);
-  if (distToBall<ballSize/2){
+  if (distToBall<ballSize/.25){
     ballx= random(width-5);
     bally = random(height-5);
     score = score +1;
@@ -67,39 +70,40 @@ function levelOne(){
     gameState= "L2";
   }
   line(ballx+20, bally+20, mouseX, mouseY);
-  image(img1, ballx, bally);
+image(img1, ballx-20, bally-20,160,80);
 } // end of level 1
 
 
 function levelTwo(){
   text("level 2", width/2, height-20);
   var distToBall = dist(ballx+20, bally+20, mouseX, mouseY);
-  if (distToBall<ballSize/2){
+  if (distToBall<ballSize/.25){
     ballx= random(width-5);
     bally = random(height-5);
     score = score +1;
+    ballSize=ballSize-.1;
   } // end if
   if (score>=10){
        gameState= "L3";
   }
-   image(img1, ballx, bally);
+    image(img1, ballx, bally, ballSize, ballSize);
 } // end of level 2
 
 function levelThree(){
   text("level 3", width/2, height-20);
   var distToBall = dist(ballx+20, bally+20, mouseX, mouseY);
-  if (distToBall<ballSize/2){
+  if (distToBall<ballSize/.25){
     ballx= random(width-5);
     bally = random(height-5);
     score = score +1;
-    ballSize=ballSize -1;
+    ballSize=ballSize -.1;
   } // end if
-  if (score>=35){
+  if (score>=30){
        gameState= "Win";
   }
       image(img1, ballx, bally, ballSize, ballSize);
 } // end level 3
 
 function win(){
-  text("You Won", width/2, height-20);
+  text("You Won", width/2, height/2);
 } // end win
